@@ -1,0 +1,58 @@
+{
+  "evidence": {},
+  "explanation": "All 12 gates require independently reviewed primary evidence; this tool cannot certify a system. Hardware and third-party security sign-off cannot be inferred from logs.",
+  "gates": {
+    "benchmarks": {
+      "pass": false,
+      "why": "Boot latency, responsiveness, gaming, power comparisons measured"
+    },
+    "hardware": {
+      "pass": false,
+      "why": "Supported hardware matrix and driver, networking/audio, suspend/resume validated"
+    },
+    "licenses": {
+      "pass": false,
+      "why": "Full corresponding GPL Linux kernel source, notices and patch provenance audited"
+    },
+    "qemu_boot": {
+      "pass": false,
+      "why": "Compiled kernel booted a disposable QEMU initramfs"
+    },
+    "real_kernel_packages": {
+      "pass": false,
+      "why": "Real image + header Debian packages built and verified"
+    },
+    "rollback": {
+      "pass": false,
+      "why": "A/B update failure and rollback tested, with rollback prevention"
+    },
+    "sandbox": {
+      "pass": false,
+      "why": "MAC, capabilities, filesystem and process attacks independently tested"
+    },
+    "third_party_assessment": {
+      "pass": false,
+      "why": "External security assessment completed by qualified independent reviewers"
+    },
+    "uefi_signed_boot": {
+      "pass": false,
+      "why": "UEFI Secure Boot plus authenticated kernel/initramfs/cmdline proved"
+    },
+    "vault": {
+      "pass": false,
+      "why": "Secure Rift real create/unlock/lock/recovery and adversarial review"
+    },
+    "velora_latest": {
+      "pass": false,
+      "why": "Latest Velora source/hardware integration verified with rollback"
+    },
+    "verity_root": {
+      "pass": false,
+      "why": "Kernel boots into authenticated dm-verity immutable root"
+    }
+  },
+  "production_ready": false,
+  "release": "P1",
+  "release_decision": "BLOCKED",
+  "security_certified": false
+}

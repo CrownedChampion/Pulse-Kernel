@@ -1,0 +1,47 @@
+{
+  "version": "P1",
+  "debian_platform_revision": "1.0.0-3",
+  "release_type": "research/engineering preview, not production-certified and not an installable standalone OS",
+  "foundation": "Debian 13 Linux 6.12 source build tooling (full source unavailable in sandbox)",
+  "full_kernel_compiled": false,
+  "boot_tested": false,
+  "immutable_verified_root_deployed": false,
+  "velora_current_source_provided": false,
+  "velora_tested": false,
+  "pace_actual_binary_tested": false,
+  "kernel_module": {
+    "compiled": true,
+    "name": "pulse_probe.ko",
+    "scope": "read-only diagnostics, no kernel security/scheduler patches",
+    "vermagic": "6.12.107+deb13-amd64 SMP preempt mod_unload modversions",
+    "loadable_on_velora_6.12.74": false
+  },
+  "platform_deb": "pulse-platform_1.0.0-3_amd64.deb (userspace only)",
+  "pulse_features": {
+    "Motion": "opt-in cgroup v2 profiles",
+    "Guard": "fail-closed bubblewrap sandbox prototype",
+    "Memory": "PSI diagnostics",
+    "PulseFS": "logical catalog and Secure Rift section; no file broker",
+    "Frame": "DRM/Vulkan inspections and gaming scope",
+    "Link": "Wi-Fi, Bluetooth and audio diagnostics",
+    "Wake": "boot timing and offline signed bundle staging",
+    "P1_system_integrity": "dm-verity/root image builder and Ed25519 signed update manifest tools; actual verified boot NOT enabled",
+    "Secure_Rift": "LUKS2 Argon2id vault lifecycle; executable installed but not run with cryptsetup in sandbox"
+  },
+  "rift_real_encrypted_volume_tested": false,
+  "rift_privileged_portal_broker_implemented": false,
+  "kernel_immunity_claim": false,
+  "unit_tests": 29,
+  "unit_tests_passed": 29,
+  "compatibility_identity": "Pace opt-in shim tested on synthetic executable; standard Linux apps retain Linux sysname",
+  "security_certified": false,
+  "release_decision": "BLOCKED",
+  "new_work": [
+    "P1 hardening config and post-olddefconfig audit",
+    "P1 kernel package verification correction",
+    "trusted source byte equality enforcement",
+    "real QEMU boot smoke tool (unexecuted: QEMU/kernel not available)",
+    "CI build and separate Velora integration package",
+    "strict 12-gate readiness checklist"
+  ]
+}

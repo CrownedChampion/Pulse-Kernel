@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+# Pace-specific optional identity wrapper. No changes to system-wide uname.
+set -euo pipefail
+if (( $# < 1 )); then
+  echo 'Usage: pulse-pace /absolute/path/to/pace-browser [args...]' >&2
+  exit 2
+fi
+if [[ ! -e "$1" || ! -x "$1" ]]; then
+  echo 'Pace executable not found or not executable' >&2; exit 2
+fi
+TARGET="$(readlink -f -- "$1")"
+BASE="$(basename -- "$TARGET")"
+case "$BASE" in
+  pace|Pace|pace-browser|pace-browser-*|Pace\ Browser) ;;
+  *) echo "Not a recognized Pace executable: $BASE (no identity spoof applied)" >&2; exit 2 ;;
+esac
+DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+LIB="$DIR/libpulse_pace_identity.so"
+if [[ ! -f "$LIB" && -f /usr/lib/pulse/identity/libpulse_pace_identity.so ]]; then
+  LIB=/usr/lib/pulse/identity/libpulse_pace_identity.so
+fi
+if [[ ! -f "$LIB" ]]; then echo "Missing identity shim: $LIB" >&2; exit 3; fi
+if [[ -u "$TARGET" || -g "$TARGET" ]]; then
+ echo 'Refusing setuid/setgid target (injection unsafe)' >&2; exit 3
+fi
+shift
+export PULSE_PACE_IDENTITY=1
+export PULSE_PACE_EXECUTABLE="$TARGET"
+export LD_PRELOAD="$LIB${LD_PRELOAD:+:$LD_PRELOAD}"
+exec "$TARGET" "$@"
